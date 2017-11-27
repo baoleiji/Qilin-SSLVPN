@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>login</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+<LINK rel=stylesheet type=text/css href="{{$template_root}}/cssjs/all_purpose_style.css">
+<META name=GENERATOR content="MSHTML 9.00.8112.16470">
+</HEAD>
+<BODY>
+<P>&nbsp;</P>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<TABLE width="634" border=0 align=center cellPadding=0 cellSpacing=0>
+  <FORM method=post action=admin.php?controller=admin_index&amp;action=chklogin&amp;ref= target=_top>
+  <TBODY>
+  <TR>
+    <TD align=center><IMG border=0 src="{{$template_root}}/images/logo1.jpg" 
+      width=634 height=73></TD>
+  </TR>
+  <TR>
+    <TD height=251 align=center valign="top" background="{{$template_root}}/images/bottom_bg.jpg"><table width="60%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td height="140" align="center"><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="a8c6d8">
+          <tr>
+            <td height="35" bgcolor="dae4e4"><strong> &nbsp;欢迎登陆</strong></td>
+          </tr>
+          <tr>
+            <td height="80" bgcolor="ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="34%" height="30" align="right">用户名：</td>
+                <td width="66%"><input type="text" name="username" id="textfield"></td>
+              </tr>
+              <tr>
+                <td height="30" align="right">口&nbsp;令：</td>
+                <td><input type="password" name="password" id="textfield2"></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td align="center"><input name="button" type="submit" class="btn1" id="button" value="登 陆"></td>
+      </tr>
+    </table></TD>
+  </TR>
+  </FORM></TABLE>
+</BODY></HTML>

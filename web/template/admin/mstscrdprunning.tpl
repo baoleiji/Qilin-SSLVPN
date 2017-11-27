@@ -1,0 +1,1 @@
+freesvr://"&action=StartMstscMonitor&host={{$session.proxy_addr}}&port=3391&username={{$sid}}&bpp={{$session.bpp}}&vpnip={{$vpnip}}&window_size={{$session.window_size}}&password=encoded password&debug={{$smarty.session.ADMIN_FREESVRDEBUG}}&"

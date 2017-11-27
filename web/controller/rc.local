@@ -1,0 +1,6 @@
+route add -net 192.168.0.0/16 gw 10.0.0.1
+route add -net 192.168.0.0/16 gw 10.0.0.1
+route add -net 192.168.0.0/16 gw 10.0.0.1
+route add -net 192.168.0.0/16 gw 10.0.0.1
+route add -net 192.168.0.0/16 gw 10.0.0.1
+route add -net 192.168.0.0/16 gw 10.0.0.1

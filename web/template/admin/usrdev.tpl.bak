@@ -1,0 +1,193 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<title>{{$title}}</title>
+<meta name="generator" content="editplus">
+<meta name="author" content="nuttycoder">
+<link href="{{$template_root}}/all_purpose_style.css" rel="stylesheet" type="text/css" />
+</head>
+<script>
+function userlogin(aid,tid){
+	tid = document.getElementById(tid);
+	aid = document.getElementById(aid);
+	aid.href=aid.href + "&logintool=" + tid.options[tid.options.selectedIndex].value;
+}
+</script>
+<body>
+
+
+	<table width="98%" border="0" cellspacing="0" cellpadding="0">
+
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="22"><img src="{{$template_root}}/images/main_left.gif" width="22" height="31"></td>
+          <td background="{{$template_root}}/images/main_bg1.gif" class="main_title">{{$title}}</td>
+          
+          
+          <td width="2"><img src="{{$template_root}}/images/main_right.gif" width="2" height="31"></td>
+        </tr>
+
+      </table></td>
+  </tr>
+   <tr>
+    <td class="main_content">
+<form action="{{$curr_url}}" method="post" name="report" >
+IP:<input type="text" id="sip" name="sip" value="{{$sip}}" ><input type="submit" name="submit" value="{{$language.Commit}}" />
+</form> 
+	  </td>
+  </tr>
+  <tr>
+	<td class="main_content">
+<TABLE border=0 cellSpacing=1 cellPadding=5 width="100%" bgColor=#ffffff valign="top">
+                <TBODY>
+				 <TR>
+                  	<TD colspan="2">负载均衡:<select id="lb" name="lb" >
+<option value="{{$localip}}">{{$localip}}</option>
+{{section name=l loop=$lb}}
+<option value="{{$lb[l].ip}}">{{$lb[l].ip}}</option>
+{{/section}}
+</select>
+</TD>
+                    <TD colspan="3">登录方式:<select id="app_act" >
+					<option value="applet">applet</option>
+					<option value="activeX">activeX</option>
+					</select></TD>
+                    {{if $type ne 'fort'}}
+                    <TD ></TD>
+                    {{/if}}
+					<TD ></TD>
+                  </TR>
+                  <TR>
+                  	<TD bgColor=#e0edf8 width="5%">ID</TD>
+                    <TD bgColor=#e0edf8 width="10%">{{$language.IPAddress}}</TD>
+                    {{if $type ne 'fort'}}
+                    <TD bgColor=#e0edf8 width="7%">登陆{{$language.User}}</TD>
+                    {{/if}}
+					 <TD bgColor=#e0edf8 width="5%">托管密码</TD>
+                    <TD bgColor=#e0edf8 width="10%">{{$language.HostName}}</TD>
+                    <TD bgColor=#e0edf8 width="8%">{{$language.System}}</TD>
+                   
+                   	<TD bgColor=#e0edf8 width="30%">{{$language.Operate}}</TD>
+                  </TR>
+			{{section name=t loop=$alldev}}
+			<tr bgcolor='{{if $alldev[t].passwordtry eq 1 or $alldev[t].passwordtry eq 2}}red{{/if}}'>
+				<td class="td_line">{{$alldev[t].id}}</td>
+				<td class="td_line">{{$alldev[t].device_ip}}</td>
+				{{if $type ne 'fort'}}
+				<td class="td_line">{{$alldev[t].username}}</td>
+				{{/if}}
+				<td class="td_line">{{if $alldev[t].entrust_password}}是{{else}}否{{/if}}</td>
+				<td class="td_line">{{$alldev[t].hostname}}</td>
+				<td class="td_line">{{$alldev[t].device_type}}</td>
+
+				<td class="td_line" width="30%">
+					{{if $admin_level == 0}}
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'>
+					
+					
+					{{$alldev[t].login_method}}
+					(
+					{{if $alldev[t].login_method eq 'ssh1' or $alldev[t].login_method eq 'ssh' or $alldev[t].login_method eq 'telnet' or $alldev[t].login_method eq 'rlogin'}}
+					
+					
+					<a id="p{{$alldev[t].id}}" href="admin.php?controller=admin_pro&action=dev_login&id={{$alldev[t].id}}&logintool=putty&type={{$type}}" onclick="return goto3(this.id)" target="hide">putty</a> |
+			
+					 <a id="s{{$alldev[t].id}}" href="admin.php?controller=admin_pro&action=dev_login&id={{$alldev[t].id}}&logintool=securecrt&type={{$type}}" onclick="return goto3(this.id)"  target="hide" >securecrt</a>
+					
+					{{elseif $alldev[t].login_method eq 'ftp' or $alldev[t].login_method eq 'sftp'}}
+					<a id="a{{$alldev[t].id}}" href='admin.php?controller=admin_pro&action=dev_login&logintool=winscp&id={{$alldev[t].id}}'  onclick="return goto3(this.id)" target="hide">登录</a>
+					
+					{{elseif $alldev[t].login_method eq 'RDP2008' or $alldev[t].login_method eq 'RDP' or $alldev[t].login_method eq 'vnc' or $alldev[t].login_method eq 'Web' or $alldev[t].login_method eq 'Sybase' or $alldev[t].login_method eq 'Oracle' or $alldev[t].login_method eq 'DB2'}}
+					
+					<a id="a{{$alldev[t].id}}1" onclick="rdpgo({{$alldev[t].id}});return false;" href='admin.php?controller=admin_pro&rdptype=activex&action=dev_login&id={{$alldev[t].id}}'>{{$language.LocalUser}}</a>
+					<select name='fenbianlv' id='fenbianlv{{$alldev[t].id}}' > 
+					<option value="3">全屏</option>
+					<option value="1">800*600</option>
+					<option value="2">1024*768</option>
+					</select>
+					<a id="a{{$alldev[t].id}}2" onclick="rdpgo2({{$alldev[t].id}})" href='#' target="_blank">WEB</a>
+					<select name='fenbianlv' id='fenbianlv2{{$alldev[t].id}}' >
+					<option value="1">全屏</option>
+					<option value="3" selected>800*600</option>
+					<option value="4">1024*768</option>
+					</select>					 
+					{{/if}}
+					
+					)
+					{{if $alldev[t].change_password}}
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a  onclick="window.open ('admin.php?controller=admin_pro&action=change_device_pwd&sid={{$alldev[t].id}}', 'newwindow', 'height=330, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no');return false;" href='#'>修改密码</a>
+					{{/if}}
+					{{/if}}
+				
+					{{if $admin_level == 10}}
+					<img src='{{$template_root}}/images/list_ico2.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href='admin.php?controller=admin_pro&action=dev_checkpass&id={{$alldev[t].id}}'>{{$language.View}}{{$language.Password}}</a>
+					{{/if}}				
+{{*
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href='admin.php?controller=admin_pro&action=dev_edit&id={{$alldev[t].id}}'>{{$language.Edit}}</a>
+					
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href='admin.php?controller=admin_pro&action=bind_user&id={{$alldev[t].id}}'>{{$language.Set}}{{$language.User}}</a>
+					<img src='{{$template_root}}/images/delete_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href="#" onClick="if(!confirm('{{$language.Delete_sure_}}？')) {return false;} else { location.href='admin.php?controller=admin_pro&action=dev_del&id={{$alldev[t].id}}';}">{{$language.Delete}}</a>
+				*}}</td> 
+			</tr>
+			{{/section}}
+                <tr>
+	           <td  colspan="8">
+		   			{{$language.all}}{{$total}}{{$language.Recorder}}  {{$page_list}}  {{$language.Page}}：{{$curr_page}}/{{$total_page}}{{$language.page}}  {{$items_per_page}}{{$language.Recorder}}/{{$language.page}}  {{$language.Goto}}<input name="pagenum" type="text" size="2" onKeyPress="if(event.keyCode==13) window.location='admin.php?controller=admin_pro&action=dev_index&page='+this.value;">{{$language.page}}
+		   </td>
+		</tr>
+		</TBODY>
+              </TABLE>
+	</td>
+  </tr>
+</table>
+
+<script language="javascript">
+
+function my_confirm(str){
+	if(!confirm(str + "？"))
+	{
+		window.event.returnValue = false;
+	}
+}
+function rdpgo(iid){
+	var fenbian = document.getElementById('fenbianlv'+iid).options[document.getElementById('fenbianlv'+iid).selectedIndex].value;
+	var hid = document.getElementById('hide');
+	var lbip = document.getElementById('lb').options[document.getElementById('lb').options.selectedIndex].value;
+	var app_act = document.getElementById('app_act').options[document.getElementById('app_act').options.selectedIndex].value;
+	
+	hid.src='admin.php?controller=admin_pro&action=dev_login&id='+iid+'&screen='+fenbian+'&selectedip='+lbip+'&app_act='+app_act;
+//alert(hid.src);
+	//window.open(document.getElementById('hide').src);
+	return false;	
+}
+function rdpgo2(iid){
+	var fenbian = document.getElementById('fenbianlv2'+iid).options[document.getElementById('fenbianlv2'+iid).selectedIndex].value;
+	var hid = document.getElementById('hide');
+	var lbip = document.getElementById('lb').options[document.getElementById('lb').options.selectedIndex].value;
+	var app_act = document.getElementById('app_act').options[document.getElementById('app_act').options.selectedIndex].value;
+	
+	document.getElementById('a'+iid+'2').href='admin.php?controller=admin_pro&rdptype=activex&action=dev_login&id='+iid+'&screen='+fenbian+'&selectedip='+lbip+'&app_act='+app_act;
+	//alert(hid.src);
+	//window.open(document.getElementById('hide').src);
+	return true;	
+}
+
+function goto3(iid){
+	var idnumber = iid.substring(1);
+	var lbip = document.getElementById('lb').options[document.getElementById('lb').options.selectedIndex].value;
+	if(!lbip){
+		alert('请选择负载均衡');
+		return false;
+	}
+	var app_act = document.getElementById('app_act').options[document.getElementById('app_act').options.selectedIndex].value;
+	document.getElementById(iid).href=document.getElementById(iid).href+'&selectedip='+lbip+'&app_act='+app_act;
+	//window.open(document.getElementById(iid).href);
+	return true;
+}
+</script>
+</body>
+<iframe id="hide" name="hide" height="0"  frameborder="0" scrolling="no"></iframe>
+</html>
+
+

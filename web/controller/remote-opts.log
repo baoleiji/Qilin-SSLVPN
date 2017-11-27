@@ -1,0 +1,14 @@
+lili@127.0.0.1's password: sinosoft
+
+Last login: Tue Jul 12 23:35:38 2011 from 127.0.0.1
+-bash: /home/lili/.bashrc: line 9: syntax error: unexpected end of file
+-bash-3.2$ passwd
+passwd
+Changing password for user lili.
+Changing password for lili
+(current) UNIX password: sinosoft
+
+New UNIX password: marsec
+
+BAD PASSWORD: it is based on a dictionary word
+New UNIX password: 

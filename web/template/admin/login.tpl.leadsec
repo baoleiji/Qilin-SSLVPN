@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+
+<title>LeadSec-SA-S 100D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{{$template_root}}/all_purpose_style.css" rel="stylesheet" type="text/css">
+</HEAD>
+<BODY>
+  <div align="center"><img src="{{$template_root}}/images/index_logo.gif" width="273" height="180"></div>
+<FORM action="admin.php?controller=admin_index&action=chklogin" method=post target=_top>
+  <table width="500" height="188" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="5"><img src="{{$template_root}}/images/login_left.gif" width="7" height="188"></td>
+      <td height="188" background="{{$template_root}}/images/login_bg.gif"><table width="90%" border="0" align="center" cellpadding="5" cellspacing="1">
+        <tr>
+          <td height="150"><TABLE width="100%" border=0 cellpadding="5" cellspacing="3">
+              <TBODY>
+                <TR>
+                  <TD width="33%" align=right class="login_font">用户名：</TD>
+                  <TD width="67%"><INPUT size=30 name=username>
+                  </TD>
+                </TR>
+                <TR>
+                  <TD align=right class="login_font">密&nbsp;&nbsp;码：</TD>
+                  <TD><INPUT type=password size=30 
+name=password>
+                  </TD>
+                </TR>
+                <TR>
+                  <TD colSpan=2 align=center><INPUT type=submit class="btn1" value="登 录">
+                  </TD>
+                </TR>
+              </TBODY>
+          </TABLE></td>
+        </tr>
+      </table></td>
+      <td width="5"><img src="{{$template_root}}/images/login_right.gif" width="7" height="188"></td>
+    </tr>
+  </table>
+</FORM>

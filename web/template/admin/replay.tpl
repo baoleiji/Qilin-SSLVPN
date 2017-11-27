@@ -1,0 +1,1 @@
+freesvr://"&action={{if $tool eq 'putty.Putty'}}StartPuttyDisplay{{else}}StartSecureCRTDisplay{{/if}}&host={{$proxy_addr}}&monitorport=22&monitoruser={{$s.luser}}--monitor1&monitorpassword={{$random}}&sid={{$sid}}&cid={{$cid}}--{{$random}}&proxy_addr={{$proxy_addr}}&debug={{$smarty.session.ADMIN_FREESVRDEBUG}}&"

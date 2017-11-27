@@ -1,0 +1,487 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<title>{{$title}}</title>
+<meta name="generator" content="editplus">
+<meta name="author" content="nuttycoder">
+<link href="{{$template_root}}/all_purpose_style.css" rel="stylesheet" type="text/css" />
+</head>
+<script>
+function userlogin(aid,tid){
+	tid = document.getElementById(tid);
+	aid = document.getElementById(aid);
+	aid.href=aid.href + "&logintool=" + tid.options[tid.options.selectedIndex].value;
+}
+
+function search(){
+	var form = document.f1;
+	if(form.sip==undefined){
+		form.action += "&appname="+form.appname.value;
+	}else{
+		form.action += "&sip="+form.sip.value;
+	}
+	form.submit();
+	return true;
+}
+
+function windows_version(){
+	var pos = navigator.appVersion.indexOf("Windows NT");
+	if(pos > 0){
+		return parseFloat(navigator.appVersion.substring(pos+10, navigator.appVersion.indexOf(";",pos)));
+	}
+}
+var OSVersion = windows_version();
+function checkieNT52(obj){return true;
+	if(OSVersion==5.2&&obj.checked){
+		alert('Windows2003不支持剪切板');
+		obj.checked=false;
+	}
+}
+</script>
+<body>
+{{if $smarty.session.ADMIN_LEVEL eq 0 || $smarty.session.ADMIN_LEVEL eq 10 || $smarty.session.ADMIN_LEVEL eq 101}}
+<style type="text/css">
+a {
+    color: #003499;
+    text-decoration: none;
+} 
+a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+</style>
+<td width="84%" align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td valign="middle" class="hui_bj"><div class="menu">
+<ul>
+{{if $smarty.session.ADMIN_LEVEL eq 0}}
+{{if $smarty.get.logintype ne 'apppub' }}
+<li class={{if $smarty.get.logintype }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&gid={{$gid}}&all=1">设备列表</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype }}3{{/if}}.jpg" align="absmiddle"/></li>
+<li class={{if $smarty.get.logintype ne 'ssh' }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype ne 'ssh' }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&logintype=ssh&gid={{$gid}}">SSH设备</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype ne 'ssh' }}3{{/if}}.jpg" align="absmiddle"/></li>
+<li class={{if $smarty.get.logintype ne 'telnet' }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype ne 'telnet' }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&logintype=telnet&gid={{$gid}}">TELNET设备</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype ne 'telnet' }}3{{/if}}.jpg" align="absmiddle"/></li>
+<li class={{if $smarty.get.logintype ne 'rdp' }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype ne 'rdp' }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&logintype=rdp&gid={{$gid}}">RDP设备</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype ne 'rdp' }}3{{/if}}.jpg" align="absmiddle"/></li>
+<li class={{if $smarty.get.logintype ne 'vnc' }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype ne 'vnc' }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&logintype=vnc&gid={{$gid}}">VNC设备</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype ne 'vnc' }}3{{/if}}.jpg" align="absmiddle"/></li>
+<li class={{if $smarty.get.logintype ne 'ftp' }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype ne 'ftp' }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&logintype=ftp&gid={{$gid}}">FTP设备</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype ne 'ftp' }}3{{/if}}.jpg" align="absmiddle"/></li>
+
+<li class={{if $smarty.get.logintype ne '_apppub' }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype ne '_apppub' }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&logintype=_apppub&gid={{$gid}}">应用</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype ne '_apppub' }}3{{/if}}.jpg" align="absmiddle"/></li>
+{{else}}
+<li class={{if $smarty.get.logintype ne 'apppub' }}"me_b"{{else}}"me_a"{{/if}}><img src="{{$template_root}}/images/an1{{if $smarty.get.logintype ne 'apppub' }}1{{/if}}.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main&logintype=apppub&gid={{$gid}}">应用发布设备</a><img src="{{$template_root}}/images/an3{{if $smarty.get.logintype ne 'apppub' }}3{{/if}}.jpg" align="absmiddle"/></li>
+{{/if}}
+{{elseif $smarty.session.ADMIN_LEVEL eq 10 or $smarty.session.ADMIN_LEVEL eq 101}}
+<li class="me_a"><img src="{{$template_root}}/images/an1.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main">设备密码</a><img src="{{$template_root}}/images/an3.jpg" align="absmiddle"/></li>
+<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=passwordedit">修改密码</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+{{if $smarty.session.ADMIN_LEVEL eq 10}}
+<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=dev_index">设备列表</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+{{/if}}{{/if}}
+</ul>
+</div></td></tr>
+
+{{/if}}
+
+	
+{{if $smarty.session.ADMIN_LEVEL ne 0 && $smarty.session.ADMIN_LEVEL ne 10 && $smarty.session.ADMIN_LEVEL ne 101}}
+  <tr>
+    <td  class="hui_bj">{{$title}}</td>
+          
+          
+          <td width="2"><img src="{{$template_root}}/images/main_right.gif" width="2" height="31"></td>
+        </tr>
+
+      </table></td>
+  </tr>
+  {{/if}}
+   <tr>
+    <td class="main_content">
+<form  name="f1" action="{{$curr_url}}" method="post" name="report" onsubmit="return search();" >
+{{if  $logintype eq 'apppub' or $logintype eq '_apppub'}}
+应用名称：<input type="text" class="wbk" id="appname" name="appname" value="{{$sip}}" >
+{{else}}
+IP：<input type="text" class="wbk" id="sip" name="sip" value="{{$sip}}" >
+{{/if}}
+{{if $admin_level == 0}}
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负载均衡：<select  class="wbk"  id="lb" name="lb" >
+  <option value="">未指定</option>
+<option value="{{$localip}}">{{$localip}}</option>
+{{section name=l loop=$lb}}
+<option value="{{$lb[l].ip}}">{{$lb[l].ip}}</option>
+{{/section}}
+</select>&nbsp;&nbsp;&nbsp;&nbsp;登录方式：<select  class="wbk"  id="app_act" >
+					<option value="applet">applet</option>
+					<option value="activeX">activeX</option>
+					</select>
+</select>
+{{/if}}&nbsp;&nbsp;<input type="submit" height="35" align="middle" value=" 确定 " border="0" class="bnnew2"/>&nbsp;&nbsp;&nbsp;&nbsp;磁盘映射:<input type="checkbox" name="rdpdiskauth_" id="rdpdiskauth_" {{if !$member.rdpdiskauth}}disabled{{/if}} value="1"  />&nbsp;&nbsp;&nbsp;&nbsp;剪切版:<input type="checkbox" name="rdpclipauth_" id="rdpclipauth_" {{if !$member.rdpclipauth }}disabled{{/if}}  onclick="checkieNT52(this)" checked value="1"  />&nbsp;&nbsp;&nbsp;&nbsp;本地:<input type="checkbox" name="consoleauth_" id="consoleauth_"  value="1"  />&nbsp;&nbsp;<select  class="wbk"  name='fenbianlv' id='fenbianlv' > 
+					<option value="3" {{if $member.rdp_screen eq 3}}selected{{/if}}>全屏</option>
+					<option value="1" {{if $member.rdp_screen eq 1}}selected{{/if}}>800*600</option>
+					<option value="2" {{if $member.rdp_screen eq 2}}selected{{/if}}>1024*768</option>
+					</select>&nbsp;&nbsp;<select  class="wbk"  name='login_type' id='login_type' > 
+					<option value="web" {{if $member.default_appcontrol eq 0}}selected{{/if}}>WEB</option>
+					<option value="rdp" {{if $member.default_appcontrol eq 1}}selected{{/if}}>RDP</option>
+					</select>
+</form>
+	  </td>
+  </tr>
+  <tr>
+	<td class="">
+<TABLE border=0 cellSpacing=1 cellPadding=5 width="100%" bgColor=#ffffff valign="top" class="BBtable">
+                <TBODY>
+		{{if  $logintype ne 'apppub' and $logintype ne '_apppub'}}		
+                  <TR>
+					<th class="list_bg"  width="5%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=id&orderby2={{$orderby2}}" >ID</a></TD>
+         			{{if  $logintype eq 'apppub' or $logintype eq '_apppub'}}
+					 <th class="list_bg"  width="13%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=name&orderby2={{$orderby2}}" >应用程序</a></TD>
+					  <th class="list_bg"  width="9%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=device_ip&orderby2={{$orderby2}}" >目标地址</a></TD>
+					 <th class="list_bg"  width="9%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=appserverip&orderby2={{$orderby2}}" >应用发布服务</a></TD>
+					 
+					{{else}}
+					<th class="list_bg"  width="9%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=device_ip&orderby2={{$orderby2}}" >服务器地址</a></TD>
+					{{/if}}
+                   {{if  $logintype ne 'apppub' && $logintype ne '_apppub'}}
+					 <th class="list_bg"  width="10%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=hostname&orderby2={{$orderby2}}" >主机名</a></TD>
+					{{/if}}
+					
+                    {{if $type ne 'fort' }}
+                    <th class="list_bg"  width="7%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=username&orderby2={{$orderby2}}" >登陆用户</a></TD>
+                    {{/if}}
+					
+                   
+                   
+                   {{if $admin_level == 10}}
+				    <th class="list_bg"  width="8%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=login_method&orderby2={{$orderby2}}" >登录方式</a></TD>
+				   {{/if}} 
+				   <th class="list_bg"  width="8%"><a href="admin.php?controller=admin_index&action=main&logintype={{$smarty.get.logintype}}&orderby1=entrust_password&orderby2={{$orderby2}}" >登录方式</a></TD>
+                   	<th class="list_bg"  width="30%">操作</TD>
+                  </TR>
+			{{section name=t loop=$alldev}}
+			<tr bgcolor='{{if !$alldev[t].enable }}#cccccc{{elseif $alldev[t].passwordtry eq 1 or $alldev[t].passwordtry eq 2}}red{{elseif $smarty.section.t.index % 2 == 0}}f7f7f7{{/if}}'>
+				<td>{{$alldev[t].id}}</td>
+				{{if  $logintype eq 'apppub' or $logintype eq '_apppub'}}
+				<td></td>
+				<td>{{$alldev[t].appserverip}}</td>
+				{{/if}}
+				
+				<td>{{$alldev[t].device_ip}}</td>
+				{{if  $logintype eq 'apppub' or $logintype eq '_apppub'}}					 
+				{{else}}
+				<td><span  title="{{$alldev[t].hostname}}" >{{$alldev[t].hostname}}</span></td>
+				{{/if}}
+				{{if $type ne 'fort'}}
+				<td>{{if $alldev[t].username eq ''}}空用户{{else}}{{$alldev[t].username}}{{/if}}</td>
+				{{/if}}
+				
+				{{if $admin_level == 10}}
+				<td><font style="font-size:12px;" {{if $alldev[t].puttyhong eq 1}}color="red"{{/if}} >{{$alldev[t].login_method}}<font></td>
+				{{/if}}
+				<td>{{if $alldev[t].entrust_password}}代填密码{{else}}手填密码{{/if}}</td>
+				<td class="td_line" width="30%">
+					{{if $admin_level == 0}}
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'>
+					
+					{{if  $alldev[t].login_method eq 'RDP'}}					{{if $alldev[t].enable}}
+					(<a id="a{{$alldev[t].id}}1" onclick="rdpgo({{$alldev[t].id}},0,true);return false;" href='admin.php?controller=admin_pro&rdptype=activex&action=dev_login&id={{$alldev[t].id}}'><font style="font-size:12px;" {{if $alldev[t].puttyhong eq 1}}color="red"{{/if}} >{{$alldev[t].login_method}}
+</font></a>{{if  $windows_version ne '5.2'}}| <a id="a{{$alldev[t].id}}2" onclick="rdpgo2({{$alldev[t].id}},0,true)" href='#' target="_blank">WEB</a>{{/if}}					{{else}}
+					({{$alldev[t].login_method}}| WEB)
+					{{/if}}
+					{{else}}
+					<font style="font-size:12px;" {{if $alldev[t].puttyhong eq 1}}color="red"{{/if}} >{{if $alldev[t].login_method eq 'apppub' }}应用发布{{else}}{{$alldev[t].login_method}}{{/if}}</font>
+					(
+					{{/if}}
+					{{if $alldev[t].login_method eq 'ssh1' or $alldev[t].login_method eq 'ssh' or $alldev[t].login_method eq 'telnet' or $alldev[t].login_method eq 'rlogin'}}	{{if $alldev[t].enable }}
+					<a id="p{{$alldev[t].id}}" href="admin.php?controller=admin_pro&action=dev_login&id={{$alldev[t].id}}&logintool=putty&type={{$type}}" onclick="return goto3(this.id)" target="hide">putty</a> |
+			
+					 <a id="s{{$alldev[t].id}}" href="admin.php?controller=admin_pro&action=dev_login&id={{$alldev[t].id}}&logintool=securecrt&type={{$type}}" onclick="return goto3(this.id)"  target="hide" >securecrt</a>
+					 {{else}}
+					 putty | securecrt
+					{{/if}}
+					{{elseif $alldev[t].login_method eq 'ftp' or $alldev[t].login_method eq 'sftp'}}
+					{{if $alldev[t].enable }}
+					<a id="a{{$alldev[t].id}}" href='admin.php?controller=admin_pro&action=dev_login&logintool=winscp&id={{$alldev[t].id}}'  onclick="return goto3(this.id)" target="hide">登录</a>
+					{{else}}
+					登录
+					{{/if}}
+					{{elseif $alldev[t].login_method eq 'RDP2008' or $alldev[t].login_method eq 'vnc' or $alldev[t].login_method eq 'Web' or $alldev[t].login_method eq 'Sybase' or $alldev[t].login_method eq 'Oracle' or $alldev[t].login_method eq 'DB2' or $alldev[t].login_method eq 'apppub'}}
+					{{if $alldev[t].enable }}
+					<a id="a{{$alldev[t].id}}1" onclick="rdpgo({{$alldev[t].id}},0,false);return false;" href='admin.php?controller=admin_pro&rdptype=activex&action=dev_login&id={{$alldev[t].id}}'><font style="font-size:12px;" {{if $alldev[t].puttyhong eq 1}}color="red"{{/if}} >RDP</font></a> {{if  $windows_version ne '5.2'}}| <a id="a{{$alldev[t].id}}2" onclick="rdpgo2({{$alldev[t].id}},0,false)" href='#' target="_blank">WEB</a>
+{{/if}}					{{else}}
+					RDP | WEB
+					{{/if}}	
+					{{/if}}					
+					)				
+					{{if $alldev[t].login_method eq 'ssh' and $alldev[t].sftp }}
+					sftp(
+					{{if $alldev[t].enable }}
+					<a id="a{{$alldev[t].id}}" href='admin.php?controller=admin_pro&action=dev_login&logintool=winscp&id={{$alldev[t].id}}'  onclick="return goto3(this.id)" target="hide">WINSCP</a>
+					{{else}}
+					WINSCP
+					{{/if}}	
+					)
+					{{/if}}	
+					{{if $alldev[t].change_password}}
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a  onclick="window.open ('admin.php?controller=admin_pro&action=change_device_pwd&sid={{$alldev[t].id}}', 'newwindow', 'height=330, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no');return false;" href='#'>修改密码</a>
+					{{/if}}
+					<img src='{{$template_root}}/images/list_ico2.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href='admin.php?controller=admin_pro&action=test_port&ip={{$alldev[t].device_ip}}&port={{$alldev[t].port}}' target="hide">检测</a>
+					{{/if}}
+					
+					{{if $admin_level == 10}}
+					<img src='{{$template_root}}/images/list_ico2.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href='admin.php?controller=admin_pro&action=dev_checkpass&id={{$alldev[t].id}}'>查看密码</a>
+					{{/if}}				
+{{*
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href='admin.php?controller=admin_pro&action=dev_edit&id={{$alldev[t].id}}'>修改</a>
+					
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href='admin.php?controller=admin_pro&action=bind_user&id={{$alldev[t].id}}'>设置用户</a>
+					<img src='{{$template_root}}/images/delete_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'><a href="#" onClick="if(!confirm('您确定要删除？')) {return false;} else { location.href='admin.php?controller=admin_pro&action=dev_del&id={{$alldev[t].id}}';}">删除</a>
+				*}}</td> 
+			</tr>
+			{{section name=tt loop=$alldev[t].appmember}}
+			<tr bgcolor='{{if $alldev[t].passwordtry eq 1 or $alldev[t].passwordtry eq 2}}red{{elseif $smarty.section.t.index % 2 == 0}}f7f7f7{{/if}}'>
+				<td>{{$alldev[t].appmember[tt].appdeviceid}}</td>
+				<td><span  title="{{$alldev[t].appmember[tt].name}}" >{{$alldev[t].appmember[tt].name}}</span></td>
+				<td>{{$alldev[t].appmember[tt].device_ip}}</td>
+				<td>{{$alldev[t].appmember[tt].appserverip}}</td>
+				
+				{{if $type ne 'fort'}}
+				<td>{{if $alldev[t].username eq ''}}空用户{{else}}{{$alldev[t].username}}{{/if}}</td>
+				{{/if}}
+				<td>{{if $alldev[t].entrust_password}}自动登录{{else}}手填密码{{/if}}</td>
+				<td class="td_line" width="30%">
+					{{if $admin_level == 0}}
+					<img src='{{$template_root}}/images/edit_ico.gif' width=16 height='16' hspace='5' border='0' align='absmiddle'>	
+					{{if $alldev[t].login_method eq 'apppub'}}	
+					{{if $alldev[t].enable }}
+					<a id="a{{$alldev[t].id}}0{{$alldev[t].appmember[tt].appdeviceid}}1" onclick="rdpgo({{$alldev[t].id}},{{$alldev[t].appmember[tt].appdeviceid}},false);return false;" href='admin.php?controller=admin_pro&rdptype=activex&action=dev_login&id={{$alldev[t].id}}'>RDP</a> | <a id="a{{$alldev[t].id}}0{{$alldev[t].appmember[tt].appdeviceid}}2" onclick="rdpgo2({{$alldev[t].id}},{{$alldev[t].appmember[tt].appdeviceid}},false);" href='#' target="_blank">WEB</a>
+					{{else}}
+					RDP | WEB
+					{{/if}}
+					{{/if}}
+					{{/if}}
+					
+</td> 
+			</tr>
+			{{/section}}
+			{{/section}}
+
+			{{else}}
+<style type="text/css">
+<!--
+#navi{width:auto;}
+.ul {
+ list-style-type: none;margin:0; padding:0
+}
+.li {
+ float:left;width: 100px;
+}
+
+-->
+</style>
+			{{section name=t loop=$alldev}}
+			{{if $alldev[t].device_ip eq $appserverip || $logintype eq '_apppub'}}
+			<tr>
+			{{assign var="i" value=2}}
+			<td align="center" class="" background="{{$template_root}}/images/tubiao_bg.jpg">
+<table border="0" width="100%"><tr>{{if $logintype ne '_apppub'}}<td style="width:140px;text-align:center;border:0px" ><img src="{{$template_root}}/images/windows.jpg" width='32' height='32' ><br><a id="a{{$alldev[t].id}}2"  href="#" onclick="return rdpOne({{$alldev[t].id}}, 0, false);" target="_blank">桌面</a></li>{{/if}}
+				
+					{{section name=tt loop=$alldev[t].appmember}}
+					<td style="width:140px;text-align:center;border:0px">
+					<a  id="a{{$alldev[t].id}}0{{$alldev[t].appmember[tt].appdeviceid}}2" href="#" onclick="return rdpOne({{$alldev[t].id}}, {{$alldev[t].appmember[tt].appdeviceid}}, false);" target="_blank"><img src="upload/{{if $alldev[t].appmember[tt].icon}}{{$alldev[t].appmember[tt].icon}}{{else}}nopic.jpg{{/if}}" width="32" height="32"  id="img_{{$alldev[t].id}}0{{$alldev[t].appmember[tt].appdeviceid}}" onmouseover="popit('img_{{$alldev[t].id}}0{{$alldev[t].appmember[tt].appdeviceid}}', '{{$alldev[t].appmember[tt].name|addslashes}}', '{{$alldev[t].appmember[tt].path|addslashes}}', '{{$alldev[t].appmember[tt].appserverip}}', '{{$alldev[t].appmember[tt].device_ip}}', '{{$alldev[t].appmember[tt].url}}')" onmouseout="closeit()" title="{{$alldev[t].appmember[tt].name}}"><br><span style="display:block;width:100px;text-align:center;margin-left:20px;">{{$alldev[t].appmember[tt].name}}</span></a>
+					
+					</td>
+					{{if ($i++)%7 eq 0}}
+					</tr><tr>
+					{{/if}}
+					{{/section}}
+					{{if ($i++)%7 ne 0}}
+					{{math equation=8-$i assign=m}}
+					{{section name=x loop=$m}}
+					<td style="border:1px"></td>
+					{{/section}}
+					</tr><tr>
+					{{/if}}
+					</tr></table>
+			</td>
+			</tr>
+			{{/if}}
+			{{/section}}
+			{{/if}}
+                <tr>
+	           <td  colspan="7">
+		   			{{if $logintype ne 'apppub'}}共{{$total}}个记录{{/if}}  {{$page_list}}  页次：{{$curr_page}}/{{$total_page}}页  {{if $logintype ne 'apppub'}}{{$items_per_page}}个记录/页{{/if}}  转到第<input name="pagenum" type="text" class="wbk" size="2" onKeyPress="if(event.keyCode==13) window.location='{{$curr_url}}&page='+this.value;">页
+		   </td>
+		</tr>
+		</TBODY>
+              </TABLE>
+	</td>
+  </tr>
+</table>
+
+<script language="javascript">
+
+function my_confirm(str){
+	if(!confirm(str + "？"))
+	{
+		window.event.returnValue = false;
+	}
+}
+function rdpgo(iid,appdeviceid,isrdp){	
+	if(isrdp){
+		var consoleauth = document.getElementById('consoleauth_').checked ? '1' : '0';
+	}
+	var fenbian = document.getElementById('fenbianlv').options[document.getElementById('fenbianlv').selectedIndex].value;
+	var hid = document.getElementById('hide');
+	var lbip = document.getElementById('lb').options[document.getElementById('lb').options.selectedIndex].value;
+	var app_act = document.getElementById('app_act').options[document.getElementById('app_act').options.selectedIndex].value;
+	var rdpclipauth = document.getElementById('rdpclipauth_').checked ? '1' : '0';
+	var rdpdiskauth = document.getElementById('rdpdiskauth_').checked ? '1' : '0';
+	
+	var weburl='admin.php?controller=admin_pro&action=dev_login&id='+iid+'&screen='+fenbian+'&selectedip='+lbip+'&app_act='+app_act+'&rdparg=0&appdeviceid='+appdeviceid+'&rdpclipauth='+rdpclipauth+'&rdpdiskauth='+rdpdiskauth;
+	if(isrdp){
+		weburl +='&consoleauth='+consoleauth;
+	}
+	hid.src=weburl;
+//alert(hid.src);
+	{{if $logindebug}}
+	window.open(document.getElementById('hide').src,'','rdp');
+	{{/if}}
+	return false;	
+}
+function rdpgo2(iid,appdeviceid,isrdp){
+	if(isrdp){		
+		if(appdeviceid>0){
+			var aid = 'a'+iid+"0"+appdeviceid+'2';			
+		}else{
+			var aid = 'a'+iid+'2';
+		}		
+		var consoleauth = document.getElementById('consoleauth_').checked ? '1' : '0';
+	}else{		
+		if(appdeviceid>0){
+			var aid = 'a'+iid+"0"+appdeviceid+'2';
+		}else{
+			var aid = 'a'+iid+'2';
+		}
+	}
+	var fenbian = document.getElementById('fenbianlv').options[document.getElementById('fenbianlv').selectedIndex].value;
+	var hid = document.getElementById('hide');
+	var lbip = document.getElementById('lb').options[document.getElementById('lb').options.selectedIndex].value;
+	var app_act = document.getElementById('app_act').options[document.getElementById('app_act').options.selectedIndex].value;
+	var rdpclipauth = document.getElementById('rdpclipauth_').checked ? '1' : '0';
+	var rdpdiskauth = document.getElementById('rdpdiskauth_').checked ? '1' : '0';
+	
+	document.getElementById(aid).href='admin.php?controller=admin_pro&rdptype=activex&action=dev_login&id='+iid+'&screen='+fenbian+'&selectedip='+lbip+'&app_act='+app_act+'&rdparg=0&appdeviceid='+appdeviceid+'&rdpclipauth='+rdpclipauth+'&rdpdiskauth='+rdpdiskauth;
+	if(isrdp){
+		document.getElementById(aid).href+='&consoleauth='+consoleauth;
+	}
+	//alert(hid.src);
+{{if $logindebug}}
+	window.open(document.getElementById(aid).href);
+{{/if}}
+	return true;	
+}
+
+function goto3(iid){
+	var idnumber = iid.substring(1);
+	var lbip = document.getElementById('lb').options[document.getElementById('lb').options.selectedIndex].value;
+	if(!lbip){
+		//alert('请选择负载均衡');
+		//return false;
+	}
+	var app_act = document.getElementById('app_act').options[document.getElementById('app_act').options.selectedIndex].value;
+	document.getElementById(iid).href=document.getElementById(iid).href+'&selectedip='+lbip+'&app_act='+app_act;
+	{{if $logindebug}}
+		window.open(document.getElementById(iid).href);
+	{{/if}}
+		return true;
+}
+{{if $member.default_control eq 0}}
+if(navigator.userAgent.indexOf("MSIE")>0) {
+    document.getElementById('app_act').options.selectedIndex = 1;
+}
+{{elseif $member.default_control eq 1}}
+document.getElementById('app_act').options.selectedIndex = 0;
+{{elseif $member.default_control eq 2}}
+document.getElementById('app_act').options.selectedIndex = 1;
+{{/if}}
+
+{{if $logintype eq 'apppub'}}
+{{*document.getElementById('consoletr').style.display = 'none';*}}
+{{/if}}
+
+function rdpOne(devid, appdeviceid, isrdp){
+	var logintype = document.getElementById('login_type');
+	if(logintype.options[logintype.options.selectedIndex].value=='web'){
+		if(appdeviceid>0){
+			return rdpgo2(devid, appdeviceid,isrdp);
+		}else{
+			return rdpgo2(devid, 0, false);
+		}
+
+	}else{
+		if(appdeviceid>0){
+			return rdpgo(devid, appdeviceid,isrdp);
+		}else{
+			return rdpgo(devid, 0, isrdp);
+		}
+		
+	}
+}
+
+var $ = function(x){
+	return document.getElementById(x);
+};
+function mousePosition(ev){
+    if(ev.pageX || ev.pageY){
+        return {x:ev.pageX, y:ev.pageY};
+    }
+    return {
+        x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:ev.clientY + document.body.scrollTop  - document.body.clientTop
+    };
+}
+
+function popit(id, program, path, appserverip, device_ip, url){
+	//easyDialog.close();
+	var e = window.event || arguments.callee.caller.arguments[0];
+	var ev = mousePosition(e);
+	document.getElementById('pop_programname').innerHTML=program;
+
+	document.getElementById('pop_path').innerHTML=path;
+	document.getElementById('pop_appserverip').innerHTML=appserverip;
+	document.getElementById('pop_device_ip').innerHTML=device_ip;
+	document.getElementById('pop_url').innerHTML=url;
+	var classname='hide_box'
+	pageWidth = document.documentElement.offsetWidth;
+	pageHight = document.documentElement.offsetHeight;
+	divWidth = jQuery("." + classname).width();
+	divHight = jQuery("." + classname).height();
+	if (ev.x + divWidth/2 < pageWidth) {
+		pagex = ev.x-divWidth/2;
+	} else {
+		pagex = ev.x - divWidth;
+	}
+	pagey = ev.y ;
+	//alert(document.getElementById('testBox').style.display);
+	jQuery("." + classname).css("position", "absolute").css("top", pagey + "px").css("left", pagex + "px").show();
+
+}
+
+function closeit(){
+	document.getElementById('testBox').style.display='none';
+}
+</script>
+<style>
+.hide_box{width:350;color:#fff;color:#444;background:#fff;box-shadow:1px 2px 2px #555;display:none;}
+.hide_box h4{height:26px;line-height:26px;overflow:hidden;background:#0884C4;color:#fff;padding:0 10px;border:1px solid #0884C4;font-size:14px;border-bottom:1px solid #0884C4;}
+.hide_box h4 a{width:14px;line-height:13px;_line-height:15px;height:13px;font-family:arial;overflow:hidden;display:block;background:#fff;color:#c77405;float:right;text-align:center;text-decoration:none;margin-top:7px;font-size:14px;font-weight:normal;border-radius:2px;_font-size:12px;}
+.hide_box p{font-size:13px;border:1px solid #ccc;}
+</style>
+<script type="text/javascript" src="{{$template_root}}/cssjs/jquery-1.7.2.min.js"></script>
+<div class="hide_box" id="testBox">
+	<h4><a href="javascript:void(0);" onclick="closeit();" title="关闭窗口">&times;</a>提示</h4>
+	<p align="left"><b>程序名称：</b><span id="pop_programname"></span><br />
+	<b>程序路径：</b><span id="pop_path"></span><br />
+	<b>应用服务器：</b><span id="pop_appserverip"></span><br />
+	<b>目标服务器IP：</b><span id="pop_device_ip"></span><br />
+	<b>URL：</b><span id="pop_url"></span></p>
+</div>
+</body>
+<iframe id="hide" name="hide" height="0"  frameborder="0" scrolling="no"></iframe>
+</html>
+
+
+

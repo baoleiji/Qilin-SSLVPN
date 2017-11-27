@@ -1,0 +1,1 @@
+freesvr://"&action=StartMstscAutoRunReplay&autorun={{$autorun}}&host={{$host}}&port={{$port}}&username={{$username}}&password={{$password}}&path={{$path}}&param={{$param}}&debug={{$smarty.session.ADMIN_FREESVRDEBUG}}&"

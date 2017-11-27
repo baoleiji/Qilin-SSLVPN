@@ -1,0 +1,41 @@
+@charset "utf-8";
+BODY {
+	BACKGROUND-IMAGE: url(../images/left_bg.gif); FONT: 12px 宋体; margin:0px;
+}
+A {
+	COLOR: #015fbe; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+DIV {
+	
+}
+
+.div_box1 {
+	MARGIN: 0px 5px 3px; WIDTH: 170px
+}
+.div_box2 {
+	PADDING-BOTTOM: 5px; LINE-HEIGHT: 150%; BACKGROUND-COLOR: #ffffff; PADDING-LEFT: 15px; PADDING-RIGHT: 5px; DISPLAY: none; BORDER-TOP: medium none; PADDING-TOP: 5px
+}
+.div_box2 LI {
+	LIST-STYLE-TYPE: none; MARGIN-LEFT: -16px
+}
+.div_box3 {
+	PADDING-LEFT: 20px; PADDING-RIGHT: 6px; BACKGROUND-REPEAT: no-repeat; HEIGHT: 25px; COLOR: #015fbe; CURSOR: hand; FONT-WEIGHT: bold; PADDING-TOP: 5px
+}
+.left_top_title {
+	PADDING-LEFT: 30px; PADDING-RIGHT: 6px; BACKGROUND-REPEAT: no-repeat; HEIGHT: 29px; COLOR: #ffffff; CURSOR: hand; FONT-WEIGHT: bold; PADDING-TOP: 8px;
+}
+.left_top_title a
+{COLOR: #ffffff; CURSOR: hand;}
+.left_top_title a:hover
+{
+	COLOR: #ffff00;
+	CURSOR: hand;
+	text-decoration: none;
+}
+
+.div_box3 A {
+	COLOR: #015fbe; CURSOR: hand
+}

@@ -1,0 +1,485 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<title>{{$title}}</title>
+<meta name="generator" content="editplus">
+<meta name="author" content="nuttycoder">
+<link href="{{$template_root}}/all_purpose_style.css" rel="stylesheet" type="text/css" />
+<script src="./template/admin/cssjs/jscal2.js"></script>
+<script src="./template/admin/cssjs/cn.js"></script>
+<link type="text/css" rel="stylesheet" href="./template/admin/cssjs/jscal2.css" />
+</head>
+
+<body>
+<style type="text/css">
+a {
+    color: #003499;
+    text-decoration: none;
+} 
+a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+</style>
+<style>
+A {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+#navbar {WIDTH: 100%; 
+	
+}
+#header {
+	LINE-HEIGHT: normal; WIDTH: 100%;  FONT-SIZE:12px; 
+}
+#header UL {
+	 LIST-STYLE-TYPE: none; MARGIN: 0px 0px 0px 0px; height:24px;
+}
+#header LI {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 110px; PADDING-RIGHT: 0px;  FLOAT: left;  color:#FFFFFF; background-image:url({{$template_root}}/images/tab_bg2.jpg);height:24px; padding-top:3px;
+}
+
+#header A {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; DISPLAY: block; PADDING-TOP: 5px;
+}
+#header .current {
+	  BACKGROUND: #ffffff;  BORDER-RIGHT: #417eb7 1px solid; background-image:url({{$template_root}}/images/tab_bg1.jpg);BORDER-TOP: #b9dbfb 1px solid;BORDER-left: #b9dbfb 1px solid; BORDER-right: #b9dbfb 1px solid;
+}
+#header .current A {
+	PADDING-BOTTOM: 0px; font-weight:bold;
+}
+.content {
+	MARGIN-TOP: 0px;
+}
+.content .contentMain {
+	TEXT-ALIGN: left
+}
+</style>
+<script>
+function change_option(number,index){
+ for (var i = 1; i <= number; i++) {
+      document.getElementById('current' + i).className = '';
+      document.getElementById('content' + i).style.display = 'none';
+ }
+  document.getElementById('current' + index).className = 'current';
+  document.getElementById('content' + index).style.display = 'block';
+  return false;
+}
+</script>
+<td width="84%" align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td valign="middle" class="hui_bj"><div class="menu">
+<ul>
+{{if $smarty.session.ADMIN_LEVEL eq 10}}
+<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_index&action=main">设备密码</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=passwordedit">修改密码</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+<li class="me_a"><img src="{{$template_root}}/images/an1.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=dev_index">设备列表</a><img src="{{$template_root}}/images/an3.jpg" align="absmiddle"/></li>
+<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=userdev_group">设备组列表</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+{{else}}
+    <li class="me_a"><img src="{{$template_root}}/images/an1.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=dev_index">设备列表</a><img src="{{$template_root}}/images/an3.jpg" align="absmiddle"/></li>
+    <li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=dev_group">设备组列表</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+	<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=resource_group">系统用户组</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+	<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_config&action=appserver_list">应用发布</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+	<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_app&action=app_group">应用用户组</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+	{{if $smarty.session.ADMIN_LEVEL ne 3}}
+	<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=autobackup_list">备份管理</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+	<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=autobackup_list&type=run">巡检管理</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+	{{/if}}
+	<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_pro&action=sshkey">SSH公私钥上传</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+	<li class="me_b"><img src="{{$template_root}}/images/an11.jpg" align="absmiddle"/><a href="admin.php?controller=admin_config&action=appprogram_list">应用程序</a><img src="{{$template_root}}/images/an33.jpg" align="absmiddle"/></li>
+{{/if}}
+</ul>
+</div></td></tr>
+
+
+	
+   <tr>
+    <td  align="right"><a href="admin.php?controller=admin_pro&action=dev_index&gid={{$gid}}&back=1"  ><img src="{{$template_root}}/images/back.png" width="50" border=0 width="60" /></a></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+	<td class="">
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="center"><form name="f1" method=post OnSubmit='return check()' action="admin.php?controller=admin_pro&action=dev_save&id={{$id}}">
+			 <DIV style="WIDTH:98%" id=navbar>
+    <DIV id=header>
+      <UL>
+        <LI id=current1><A onclick="return change_option(2,1);return false;" href="#">基本信息</A> </LI>
+        <LI id=current2><A onclick="return change_option(2,2);return false;" href="#">扩展信息</A> </LI>
+
+      </UL>
+    </DIV>
+				 <div id="content1" class="content">
+				   <div class="contentMain">
+	<table border=0 width=100% cellpadding=5 cellspacing=1 bgcolor="#FFFFFF" valign=top class="BBtable">
+	{{assign var="trnumber" value=0}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		服务器地址		
+		</td>
+		<td width="67%">
+		<input type=text name="IP" size=35 value="{{$IP}}" {{if $id}}readonly{{/if}}>&nbsp;&nbsp;&nbsp;ipv6<input type=checkbox name="ipv6" value="1" {{if $ipv6}}checked{{/if}} {{if $id}}readonly{{/if}}>
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		主机名	
+		</td>
+		<td width="67%">
+		<input type=text name="hostname" size=35 value="{{$hostname}}" >
+	  </td>
+	</tr>
+
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		设备组	
+		</td>
+		<td width="67%">
+				<select  class="wbk"  name="g_id" id="servergroup">
+				<option value="0" >无</option>
+		{{section name=g loop=$allgroup}}
+			<OPTION VALUE="{{$allgroup[g].id}}" {{if $allgroup[g].id == $g_id}}selected{{/if}}>{{$allgroup[g].groupname}}</option>
+		{{/section}}
+		</select>
+	  </td>
+	</tr>
+	
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		系统类型	
+		</td>
+		<td width="67%">
+				<select  class="wbk"  name="type_id">
+		{{section name=g loop=$alltype}}
+			<OPTION VALUE="{{$alltype[g].id}}" {{if $alltype[g].id == $type_id}}selected{{/if}}>{{$alltype[g].device_type}}</option>
+		{{/section}}
+		</select>
+	  </td>
+	</tr>
+	
+		{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		超级管理员口令:	
+		</td>
+		<td width="67%">
+				<input type="password" name="superpassword" value="{{$superpassword}}"/>
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		再输一次口令:	
+		</td>
+		<td width="67%">
+				<input type="password" name="superpassword2" value="{{$superpassword}}"/>
+	  </td>
+	</tr>
+		{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		修改方式	
+		</td>
+		<td width="67%">
+		<input type='radio' name="stra_type" value='mon' {{if $method == 'mon' || $method ==''}}checked{{/if}}>
+		按月
+		<input type='radio' name="stra_type" value='week' {{if $method == 'week'}}checked{{/if}}>
+		每周
+		<input type='radio' name="stra_type" value='custom'{{if $method == 'user'}}checked{{/if}}>
+		自定义
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		频率
+		</td>
+		<td width="67%">
+		<input type=text name="freq" size=35 value="{{if $freq}}{{$freq}}{{else}}1{{/if}}" >**
+		</td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td colspan='2'>
+		**频率的说明：如果修改方式选择每周，这里填写周几（1—7）,如果是按月，填写几号（1—31）,如果是自定义，这里日几日更新一次（大于0的整数）
+		</td>
+	</tr>
+{{if $smarty.session.ADMIN_LEVEL eq 1}}
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		透明审计	
+		</td>
+		<td width="67%">
+				<select  class="wbk"  name="transport">		
+			<OPTION VALUE="0" {{if $transport == 0}}selected{{/if}}>关闭</option>
+			<OPTION VALUE="1" {{if $transport == 1}}selected{{/if}}>开启</option>
+		</select>
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		SSH默认端口	
+		</td>
+		<td width="67%">
+		<input type=text name="sshport" size=35 value="{{if $id }}{{$sshport}}{{else}}22{{/if}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		TELNET默认端口	
+		</td>
+		<td width="67%">
+		<input type=text name="telnetport" size=35 value="{{if $id }}{{$telnetport}}{{else}}23{{/if}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		FTP默认端口
+		</td>
+		<td width="67%">
+		<input type=text name="ftpport" size=35 value="{{if $id }}{{$ftpport}}{{else}}21{{/if}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		RDP默认端口
+		</td>
+		<td width="67%">
+		<input type=text name="rdpport" size=35 value="{{if $id }}{{$rdpport}}{{else}}3389{{/if}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		VNC默认端口	
+		</td>
+		<td width="67%">
+		<input type=text name="vncport" size=35 value="{{if $id }}{{$vncport}}{{else}}5900{{/if}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		Oracle实例	
+		</td>
+		<td width="67%">
+		<input type=text name="oracle_name" size=35 value="{{$oracle_name}}" >
+	  </td>
+	</tr>
+{{else}}
+<input type="hidden" name="transport" value="{{$transport}}" >
+<input type="hidden" name="sshport" value="{{if $id }}{{$sshport}}{{else}}22{{/if}}" >
+<input type="hidden" name="telnetport" value="{{if $id }}{{$telnetport}}{{else}}23{{/if}}" >
+<input type="hidden" name="ftpport" value="{{if $id }}{{$ftpport}}{{else}}21{{/if}}" >
+<input type="hidden" name="rdpport" value="{{if $id }}{{$rdpport}}{{else}}3389{{/if}}" >
+<input type="hidden" name="vncport" value="{{if $id }}{{$vncport}}{{else}}3389{{/if}}" >
+	{{/if}}
+	</table> </div>
+				 </div>
+				 <div id="content2" class="content" style="display:none">
+				   <div class="contentMain">
+				   <table border=0 width=100% cellpadding=5 cellspacing=1 bgcolor="#FFFFFF" valign=top class="BBtable">
+	{{assign var="trnumber" value=$trnumber+1}}
+	
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		
+		<td width="33%" align=right>
+		巡检模式	
+		</td>
+		
+		<td width="67%">
+		<select  class="wbk"  name="monitor">		
+			<OPTION VALUE="0" {{if $monitor == 0}}selected{{/if}}>关闭</option>
+			<OPTION VALUE="1" {{if $monitor == 1}}selected{{/if}}>SNMP</option>
+			<OPTION VALUE="2" {{if $monitor == 2}}selected{{/if}}>登录</option>
+		<OPTION VALUE="3" {{if $monitor == 3}}selected{{/if}}>上传</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;端口监控:<input type=checkbox name="snmpnet" {{if $snmpnet }}checked{{/if}} size=35 value="1" >
+		</td></tr>
+	
+	
+	{{assign var="trnumber" value=$trnumber+1}}
+	
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		
+	<td width="33%" align=right>
+		SNMP字符串	
+		</td>
+		
+	<td width="67%">
+		<input type=text name="snmpkey" size=35 value="{{$snmpkey}}" >
+	  </td>
+	
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}	
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>		
+	<td width="33%" align=right>
+		监控端口	
+		</td>
+		
+	<td width="67%">
+		<input type=text name="port_monitor" size=35 value="{{$port_monitor}}" >
+	  </td>	
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}	
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>		
+	<td width="33%" align=right>
+		端口监控阀值	
+		</td>
+		
+	<td width="67%">
+		<input type=text name="port_monitor_time" size=35 value="{{$port_monitor_time}}" >
+	  </td>
+	
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		固定资产名称	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_name" size=35 value="{{$asset_name}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		规格型号	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_specification" size=35 value="{{$asset_specification}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		部门名称	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_department" size=35 value="{{$asset_department}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		存放地点	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_location" size=35 value="{{$asset_location}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		支持厂商	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_company" size=35 value="{{$asset_company}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		开始使用日期	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_start" id="asset_start" size=35 value="{{$asset_start}}" >&nbsp;&nbsp;<input type="button"  id="f_rangeStart_trigger" name="f_rangeStart_trigger" value="选择时间" class="wbk"> 
+
+	  </td>
+	</tr>
+	
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		使用年限	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_usedtime" size=35 value="{{$asset_usedtime}}" >
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		保修日期	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_warrantdate" id="asset_warrantdate" size=35 value="{{$asset_warrantdate}}" >&nbsp;&nbsp;<input type="button"  id="f_rangeEnd_trigger" name="f_rangeEnd_trigger" value="选择时间" class="wbk"> 
+	  </td>
+	</tr>
+	{{assign var="trnumber" value=$trnumber+1}}
+	<tr {{if $trnumber % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+		<td width="33%" align=right>
+		使用状况	
+		</td>
+		<td width="67%">
+		<input type=text name="asset_status" size=35 value="{{$asset_status}}" >
+	  </td>
+	</tr>
+</table>
+ </div>
+				 </div>
+			</div>
+	<tr><td align="center"><input type=button {{if !$id}}readonly{{/if}} onclick="admin.php?controller=admin_pro&action=server_detect&ip={{$IP}}"  value="硬件检测" class="an_02">&nbsp;&nbsp;&nbsp;&nbsp;<input type=submit  value="保存修改" class="an_02"></td></tr></table>
+
+</form>
+	</td>
+  </tr>
+</table>
+  <script type="text/javascript">
+var cal = Calendar.setup({
+    onSelect: function(cal) { cal.hide() },
+    showTime: true,
+	popupDirection: 'up'
+});
+cal.manageFields("f_rangeStart_trigger", "asset_start", "%Y-%m-%d %H:%M:%S");
+cal.manageFields("f_rangeEnd_trigger", "asset_warrantdate", "%Y-%m-%d %H:%M:%S");
+
+
+</script>
+<script language="javascript">
+
+function my_confirm(str){
+	if(!confirm(str + "？"))
+	{
+		window.event.returnValue = false;
+	}
+}
+
+function changeport() {
+	if(document.getElementById("ssh").selected==true)  {
+		f1.port.value = 22;
+	}
+	if(document.getElementById("telnet").selected==true)  {
+		f1.port.value = 23;
+	}
+}
+
+{{if $smarty.session.ADMIN_LEVEL eq 3 and $smarty.session.ADMIN_MSERVERGROUP}}
+var ug = document.getElementById('servergroup');
+for(var i=0; i<ug.options.length; i++){
+	if(ug.options[i].value=={{$smarty.session.ADMIN_MSERVERGROUP}}){
+		ug.selectedIndex=i;
+		ug.onchange = function(){ug.selectedIndex=i;}
+		break;
+	}
+}
+{{/if}}
+
+</script>
+<script>
+change_option(2,1);
+</script>
+</body>
+<iframe name="hide" height="0" frameborder="0" scrolling="no"></iframe>
+</html>
+
+
+

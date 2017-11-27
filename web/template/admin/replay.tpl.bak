@@ -1,0 +1,33 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<title>回放</title>
+<meta name="generator" content="editplus">
+<meta name="author" content="nuttycoder">
+<link href="{{$template_root}}/all_purpose_style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <tr>
+	<td class="main_content">
+		<table bordercolor="white" cellspacing="1" cellpadding="5" border="0" width="100%">
+			<tr bgcolor="f7f7f7">
+				<td>    
+				<applet CODEBASE="."
+					 ARCHIVE="{{$template_root}}/java2.zip"
+					 CODE="de.mud.jta.Applet" 
+					 WIDTH=600 HEIGHT=620>
+				<param name="config" value="default.conf">
+				<param name="Applet.detach.menuBar" value="true">
+				<param name="Socket.host" value="222.35.62.134">
+				<param name="Script.script" value="display>|display -s {{$filename}}">
+
+				 </applet>
+			</td>
+			</tr>
+		</table>
+	</td>
+  </tr>
+</table>
+</body>
+<iframe name="hide" height="0" frameborder="0" scrolling="no"></iframe>
+</html>

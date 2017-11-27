@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>MSTSC Player</title>
+</head>
+<body>
+<h1><center>MSTSC Player</center></h1>
+<center>
+{{if $app_act eq 'applet'}}
+	<applet code = "com.free.mstsc.AutoRun",name = "Mstsc Player",archive = "{{$template_root}}/utilities.jar",width = 0,height = 0>
+  	<param name="host" value="{{$ip}}"/> 
+	  <param name = "port" value="{{$port}}"/>
+	  <param name = "username" value = "{{$username}}" />
+	  <param name = "bpp" value = "16" />
+	  <param name = "password" value = "{{$password}}{{$dynamic_pwd}}" />
+	  <param name = "localhost" value = "{{$localhost}}" />
+	  <param name = "screen" value = "{{$screen}}" />
+	   <param name = "sid" value= "{{$sid}}" />	 
+	   {{if !$apppub}}
+	   <param name = "path" value= "{{$autorun}} {{$id}}" /> 
+	   {{else}}
+	   <param name = "path" value= "{{$autorun}}" /> 
+	   {{/if}}
+	</applet>
+{{else}}
+<object classid="clsid:9B63D7FE-1BF8-4888-B5D3-715D5A0E51E2"  codebase="{{$template_root}}/ProgramActiveX.cab#version={{$activex_version}}" width="0" height="0" id="CBrowser">
+  	<param name="host" value="{{$ip}}"/> 
+	  <param name = "port" value="{{$port}}"/>
+	  <param name = "username" value = "{{$username}}" />
+	  <param name = "bpp" value = "16" />
+	  <param name = "password" value = "{{$password}}{{$dynamic_pwd}}" />
+	  <param name = "localhost" value = "{{$localhost}}" />
+	  <param name = "screen" value = "{{$screen}}" />
+	   <param name = "sid" value= "{{$sid}}" />	 
+	    {{if !$apppub}}
+	   <param name = "path" value= "{{$autorun}} {{$id}}" /> 
+	   {{else}}
+	   <param name = "path" value= "{{$autorun}}" /> 
+	   {{/if}}
+	</object>
+    <script type = "text/javascript">
+        function Browser() 
+        {
+            if (window.ActiveXObject) 
+            {
+                try {
+                    document.getElementById("CBrowser").StartMstscAutoRun();
+                }
+                catch (e) 
+                {
+                    alert(e.description)
+                    alert(e.name)
+                    alert(e.message)
+                }
+            }
+        }
+		Browser();
+    </script>
+{{/if}}
+</center>		
+	
+</body>
+</html>
+
+

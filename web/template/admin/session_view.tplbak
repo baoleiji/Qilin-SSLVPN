@@ -1,0 +1,72 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<title>会话列表</title>
+<meta name="generator" content="editplus">
+<meta name="author" content="nuttycoder">
+<link href="{{$template_root}}/all_purpose_style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<table width="98%" border="0" cellspacing="0" cellpadding="5" >
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="22"><img src="{{$template_root}}/images/main_left.gif" width="22" height="31"></td>
+        <td background="{{$template_root}}/images/main_bg1.gif" class="main_title">会话管理</td>
+        
+        
+        <td width="2"><img src="{{$template_root}}/images/main_right.gif" width="2" height="31"></td>
+      </tr>
+    
+  <tr>
+    <td class="main_content">说明：查看会话详细记�?</td>
+  </tr>
+</table>
+
+	<table width="98%" border="0" cellspacing="0" cellpadding="5" >
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="22"><img src="{{$template_root}}/images/main_left.gif" width="22" height="31"></td>
+          <td background="{{$template_root}}/images/main_bg1.gif" class="main_title">会话管理——详细信�?/td>
+          
+          
+          <td width="2"><img src="{{$template_root}}/images/main_right.gif" width="2" height="31"></td>
+        </tr>
+      
+  
+			<tr>
+				<th width="5%">ID</th>
+				<th width="20%">执行时间</th>
+				<th width="60%">命令</th>
+				<th width="10%">操作</th>
+			</tr>
+			{{section name=t loop=$allcommand}}
+			<tr {{if $smarty.section.t.index % 2 == 0}}bgcolor="f7f7f7"{{/if}}>
+				<td>{{$allcommand[t].cid}}</td>
+				<td>{{$allcommand[t].at}}</ td>
+				<td>{{$allcommand[t].cmd}}</td>
+				<td>{{if $admin_level == 1}}here123���<img src="{{$template_root}}/images/scico.gif" width="16" height="16" align="absmiddle"><a href="admin.php?controller=admin_session&action=del_command&cid={{$allcommand[t].cid}}"></a>{{/if}}</td>
+			</tr>
+			{{/section}}
+			<tr>
+				<td colspan="12" align="right">
+					共{{$command_num}}条命�? {{$page_list}}  页次：{{$curr_page}}/{{$total_page}}�? {{$items_per_page}}条日�?�? 转到�?input name="pagenum" type="text" size="2" onKeyPress="if(event.keyCode==13) window.location='admin.php?controller=admin_session&action=view&page='+this.value;">�?<a href="admin.php?controller=admin_session&action=derive_command&sid={{$allcommand[0].sid}}" target="hide">导出为Excel</a> 
+				<!--
+				<select  class="wbk"  name="table_name">
+				{{section name=t loop=$table_list}}
+				<option value="{{$table_list[t]}}" {{if $table_list[t] == $now_table_name}}selected{{/if}}>{{$table_list[t]}}</option>
+				{{/section}}
+				</select>
+				-->
+				</td>
+			</tr>
+		
+</table>
+
+
+</body>
+<iframe name="hide" height="0" frameborder="0" scrolling="no"></iframe>
+</html>

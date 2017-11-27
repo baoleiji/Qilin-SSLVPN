@@ -1,0 +1,11 @@
+<?php
+if(!defined('CAN_RUN')) {
+	exit('Access Denied');
+}
+
+class AS400_sessions_set extends base_set {
+	protected $table_name = 'AS400_sessions';
+	protected $id_name = 'sid';
+
+}
+?>

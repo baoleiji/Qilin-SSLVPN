@@ -1,0 +1,64 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<title>回放</title>
+<meta name="generator" content="editplus">
+<meta name="author" content="nuttycoder">
+<link href="{{$template_root}}/all_purpose_style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<table width="98%" border="0" cellspacing="0" cellpadding="5" >
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="22"><img src="{{$template_root}}/images/main_left.gif" width="22" height="31"></td>
+        <td background="{{$template_root}}/images/main_bg1.gif" class="main_title">命令回放</td>
+        
+        
+        <td width="2"><img src="{{$template_root}}/images/main_right.gif" width="2" height="31"></td>
+      </tr>
+    
+</table>
+
+	<table width="98%" border="0" cellspacing="0" cellpadding="5" >
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  
+
+			<tr bgcolor="f7f7f7">
+				<td>   
+				 <applet
+	code = "com.free.putty.PuttyPlayback",
+	name = "PuttyApplet",
+	archive = "{{$template_root}}/utilities.jar",
+	width = 0,
+	height = 0>
+	   <param name = "putty_path" value = "c:\freesvr\ssh\putty.exe" />
+   <param name="host" value="{{$s.host}}"/> 
+   <param name = "monitorport" value="2221"/>                  
+   <param name = "monitoruser" value = "monitor" /> 
+   <param name = "monitorpassword" value = "freesvr" /> 
+   <param name = "sid" value= "{{$sid}}" />       
+   <param name = "cid" value= "{{$cid}}" />       
+
+	</applet>
+			</td>
+			</tr>
+		
+</table>
+
+<script language="javascript">
+
+function my_confirm(str){
+	if(!confirm(str + "？"))
+	{
+		window.event.returnValue = false;
+	}
+}
+
+</script>
+</body>
+<iframe name="hide" height="0" frameborder="0" scrolling="no"></iframe>
+</html>

@@ -1,0 +1,9 @@
+# Intel Corporation 82573E Gigabit Ethernet Controller (Copper)
+DEVICE=eth0
+HWADDR=00:25:90:04:91:22
+ONBOOT=yes
+NETMASK=255.255.255.0
+IPADDR=192.168.1.253
+GATEWAY=192.168.1.1
+TYPE=Ethernet
+=
